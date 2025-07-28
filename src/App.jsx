@@ -22,6 +22,7 @@ function App() {
             <TestimonialSection />
             <NewsletterSection />
             <Footer />
+
         </BrowserRouter>
     );
 }

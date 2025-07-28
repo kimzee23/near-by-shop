@@ -29,9 +29,11 @@ export default function NewsletterSection() {
                     </button>
                 </form>
             </div>
-            <div className="bg-red-500 text-white p-4">
+            <div className="bg-green-500 text-white p-4 rounded">
                 Tailwind is working!
             </div>
+
+
 
         </section>
     );
