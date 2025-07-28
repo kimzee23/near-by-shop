@@ -1,52 +1,101 @@
+import {
+    Box,
+    Flex,
+    Grid,
+    GridItem,
+    Text,
+    VStack,
+    HStack,
+    Link as ChakraLink,
+    Divider,
+    useBreakpointValue,
+} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 export default function Footer() {
     const year = new Date().getFullYear();
+
     return (
-        <footer className="bg-black text-white px-6 py-12">
-            <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
-                <div className="md:col-span-2">
-                    <h3 className="text-2xl font-bold mb-4">SHOP.CO</h3>
-                    <p className="text-gray-400 mb-6 text-sm">
+        <Box bg="black" color="white" px={{ base: 4, md: 10 }} py={12}>
+            <Grid
+                maxW="6xl"
+                mx="auto"
+                templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(5, 1fr)' }}
+                gap={8}
+            >
+                <GridItem colSpan={{ base: 2, md: 2 }}>
+                    <Text fontSize="2xl" fontWeight="bold" mb={4}>
+                        SHOP.CO
+                    </Text>
+                    <Text color="gray.400" fontSize="sm" mb={6}>
                         Find clothes that match your style. Unbeatable quality.
-                    </p>
-                    <div className="flex gap-4">
-                        <a href="#"><FaFacebookF /></a>
-                        <a href="#"><FaInstagram /></a>
-                        <a href="#"><FaTwitter /></a>
-                    </div>
-                </div>
+                    </Text>
+                    <HStack spacing={4}>
+                        <ChakraLink href="#" isExternal>
+                            <FaFacebookF />
+                        </ChakraLink>
+                        <ChakraLink href="#" isExternal>
+                            <FaInstagram />
+                        </ChakraLink>
+                        <ChakraLink href="#" isExternal>
+                            <FaTwitter />
+                        </ChakraLink>
+                    </HStack>
+                </GridItem>
 
-                <div>
-                    <h4 className="font-semibold mb-3">Company</h4>
-                    <ul className="space-y-2 text-gray-400 text-sm">
-                        <li><Link to="/">About</Link></li>
-                        <li><Link to="/">Careers</Link></li>
-                        <li><Link to="/">Press</Link></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 className="font-semibold mb-3">Support</h4>
-                    <ul className="space-y-2 text-gray-400 text-sm">
-                        <li><Link to="/">Contact Us</Link></li>
-                        <li><Link to="/">Help Center</Link></li>
-                        <li><Link to="/">Returns</Link></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 className="font-semibold mb-3">Resources</h4>
-                    <ul className="space-y-2 text-gray-400 text-sm">
-                        <li><Link to="/">Blog</Link></li>
-                        <li><Link to="/">Developers</Link></li>
-                        <li><Link to="/">Support Docs</Link></li>
-                    </ul>
-                </div>
-            </div>
+                {/* Links Section */}
+                <VStack align="start" spacing={2}>
+                    <Text fontWeight="semibold" mb={2}>
+                        Company
+                    </Text>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        About
+                    </ChakraLink>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Careers
+                    </ChakraLink>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Press
+                    </ChakraLink>
+                </VStack>
 
-            <div className="border-t border-gray-700 mt-12 pt-6 text-sm text-gray-500 text-center">
-                <p>© {year} SHOP.CO. All Rights Reserved.</p>
-            </div>
-        </footer>
+                <VStack align="start" spacing={2}>
+                    <Text fontWeight="semibold" mb={2}>
+                        Support
+                    </Text>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Contact Us
+                    </ChakraLink>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Help Center
+                    </ChakraLink>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Returns
+                    </ChakraLink>
+                </VStack>
+
+                <VStack align="start" spacing={2}>
+                    <Text fontWeight="semibold" mb={2}>
+                        Resources
+                    </Text>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Blog
+                    </ChakraLink>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Developers
+                    </ChakraLink>
+                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
+                        Support Docs
+                    </ChakraLink>
+                </VStack>
+            </Grid>
+
+            <Divider borderColor="gray.700" my={12} />
+
+            <Text fontSize="sm" color="gray.500" textAlign="center">
+                © {year} SHOP.CO. All Rights Reserved.
+            </Text>
+        </Box>
     );
 }

@@ -1,85 +1,145 @@
+import {
+    Box,
+    Flex,
+    HStack,
+    IconButton,
+    Text,
+    Input,
+    InputGroup,
+    InputLeftElement,
+    Stack,
+    Button,
+    useDisclosure,
+    VStack,
+    Spacer,
+} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaShoppingCart, FaBars, FaTimes, FaSearch, FaUser } from 'react-icons/fa';
-import { useState } from 'react';
 
 export default function Navbar() {
     const cart = useSelector((state) => state.cart);
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const [isOpen, setIsOpen] = useState(false);
+    const { isOpen, onToggle } = useDisclosure();
 
     return (
         <>
             {/* Promo Bar */}
-            <div className="bg-black text-white text-sm py-2 px-4 flex justify-between items-center">
-                <p>
-                    Sign up and get 20% off to your first order.{' '}
-                    <span className="underline cursor-pointer">Sign Up Now</span>
-                </p>
-                <button className="text-white text-xl leading-none hover:text-gray-300">&times;</button>
-            </div>
+            <Flex
+                bg="black"
+                color="white"
+                px={4}
+                py={2}
+                fontSize="sm"
+                justify="space-between"
+                align="center"
+            >
+                <Text>
+                    Sign up and get 20% off your first order.{' '}
+                    <Box as="span" textDecoration="underline" cursor="pointer">
+                        Sign Up Now
+                    </Box>
+                </Text>
+                <IconButton
+                    icon={<FaTimes />}
+                    size="sm"
+                    variant="unstyled"
+                    color="white"
+                    aria-label="Close promo"
+                />
+            </Flex>
 
             {/* Navbar */}
-            <header className="border-b bg-white">
-                <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-6">
+            <Box borderBottom="1px" borderColor="gray.200" bg="white" px={4} py={3}>
+                <Flex maxW="7xl" mx="auto" align="center" gap={6}>
                     {/* Logo */}
-                    <Link to="/" className="text-2xl font-bold tracking-wider text-gray-900">SHOP.CO</Link>
+                    <Text fontSize="2xl" fontWeight="bold" color="gray.800">
+                        <Link to="/">SHOP.CO</Link>
+                    </Text>
 
                     {/* Desktop Nav */}
-                    <nav className="hidden md:flex space-x-6 text-sm font-medium text-gray-700">
+                    <HStack
+                        spacing={6}
+                        fontSize="sm"
+                        fontWeight="medium"
+                        color="gray.600"
+                        display={{ base: 'none', md: 'flex' }}
+                    >
                         <Link to="/">Shop</Link>
                         <Link to="/">On Sale</Link>
                         <Link to="/">New Arrivals</Link>
                         <Link to="/">Brands</Link>
-                    </nav>
+                    </HStack>
 
-                    {/* Search Input */}
-                    <div className="hidden lg:flex flex-1 justify-center">
-                        <div className="relative w-full max-w-md">
-                            <FaSearch className="absolute top-3 left-3 text-gray-400" />
-                            <input
+                    {/* Search Bar */}
+                    <Box flex={1} display={{ base: 'none', lg: 'flex' }} justifyContent="center">
+                        <InputGroup maxW="md">
+                            <InputLeftElement pointerEvents="none" children={<FaSearch color="gray.400" />} />
+                            <Input
                                 type="text"
                                 placeholder="Search for products..."
-                                className="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                                bg="gray.100"
+                                rounded="full"
+                                _focus={{ borderColor: 'black', boxShadow: '0 0 0 1px black' }}
                             />
-                        </div>
-                    </div>
+                        </InputGroup>
+                    </Box>
 
-                    {/* Cart + Sign In */}
-                    <div className="flex items-center gap-4">
-                        <Link to="/cart" className="relative text-gray-700 hover:text-black transition">
-                            <FaShoppingCart className="text-xl" />
+                    {/* Icons */}
+                    <HStack spacing={4}>
+                        <Box position="relative">
+                            <Link to="/cart">
+                                <FaShoppingCart size="20" />
+                            </Link>
                             {totalItems > 0 && (
-                                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                                <Box
+                                    position="absolute"
+                                    top="-6px"
+                                    right="-6px"
+                                    bg="red.500"
+                                    color="white"
+                                    fontSize="xs"
+                                    px={1}
+                                    rounded="full"
+                                >
                                     {totalItems}
-                                </span>
+                                </Box>
                             )}
-                        </Link>
+                        </Box>
                         <Link to="/profile">
-                            <FaUser className="text-xl text-gray-700" />
+                            <FaUser size="20" />
                         </Link>
-                        <button
-                            className="md:hidden text-gray-700 text-xl"
-                            onClick={() => setIsOpen(!isOpen)}
-                        >
-                            {isOpen ? <FaTimes /> : <FaBars />}
-                        </button>
-                    </div>
-                </div>
+                        <IconButton
+                            icon={isOpen ? <FaTimes /> : <FaBars />}
+                            display={{ base: 'inline-flex', md: 'none' }}
+                            onClick={onToggle}
+                            variant="ghost"
+                            aria-label="Toggle menu"
+                        />
+                    </HStack>
+                </Flex>
 
                 {/* Mobile Menu */}
                 {isOpen && (
-                    <div className="md:hidden px-4 pb-4 space-y-2 text-sm font-medium text-gray-700">
-                        <Link to="/" onClick={() => setIsOpen(false)}>Shop</Link>
-                        <Link to="/" onClick={() => setIsOpen(false)}>On Sale</Link>
-                        <Link to="/" onClick={() => setIsOpen(false)}>New Arrivals</Link>
-                        <Link to="/" onClick={() => setIsOpen(false)}>Brands</Link>
-                        <button className="w-full bg-black text-white px-4 py-2 rounded hover:bg-gray-800 text-sm">
+                    <VStack align="start" spacing={4} mt={4} px={4} display={{ md: 'none' }}>
+                        <Link to="/" onClick={onToggle}>
+                            Shop
+                        </Link>
+                        <Link to="/" onClick={onToggle}>
+                            On Sale
+                        </Link>
+                        <Link to="/" onClick={onToggle}>
+                            New Arrivals
+                        </Link>
+                        <Link to="/" onClick={onToggle}>
+                            Brands
+                        </Link>
+                        <Button colorScheme="blackAlpha" onClick={onToggle} w="full">
                             Sign In
-                        </button>
-                    </div>
+                        </Button>
+                    </VStack>
                 )}
-            </header>
+            </Box>
         </>
     );
 }

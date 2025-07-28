@@ -1,40 +1,31 @@
-import { FaEnvelope } from "react-icons/fa";
+import { Box, Button, Flex, Heading, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui/react';
+import { EmailIcon } from '@chakra-ui/icons';
 
 export default function NewsletterSection() {
     return (
-        <section className="bg-black text-white py-12 px-4">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-                {/* Heading */}
-                <h2 className="text-2xl md:text-3xl font-extrabold leading-tight text-center md:text-left uppercase">
-                    Stay up to date about <br className="hidden md:block" />
-                    our latest offers
-                </h2>
+        <Box bg="black" color="white" py={12} px={6}>
+            <Flex maxW="7xl" mx="auto" direction={['column', 'row']} align="center" justify="space-between" gap={8}>
+                <Heading fontSize={['2xl', '3xl']} fontWeight="extrabold" textAlign={['center', 'left']} textTransform="uppercase">
+                    Stay up to date about <br /> our latest offers
+                </Heading>
 
-                {/* Email Input + Button */}
-                <form className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-xl">
-                    <div className="relative w-full">
-                        <FaEnvelope className="absolute top-3.5 left-4 text-gray-400" />
-                        <input
+                <Flex as="form" direction={['column', 'row']} gap={4} w="full" maxW="xl">
+                    <InputGroup>
+                        <InputLeftElement pointerEvents="none" children={<EmailIcon color="gray.400" />} />
+                        <Input
                             type="email"
-                            placeholder="Enter your email address"
-                            className="w-full pl-10 pr-4 py-3 rounded-full text-black bg-gray-100 placeholder-gray-500 text-sm focus:outline-none"
+                            placeholder="Enter your email"
+                            bg="gray.100"
+                            color="black"
+                            _placeholder={{ color: 'gray.500' }}
                             required
                         />
-                    </div>
-                    <button
-                        type="submit"
-                        className="bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-gray-200 transition whitespace-nowrap"
-                    >
+                    </InputGroup>
+                    <Button colorScheme="whiteAlpha" color="black" bg="white" _hover={{ bg: 'gray.200' }}>
                         Subscribe to Newsletter
-                    </button>
-                </form>
-            </div>
-            <div className="bg-green-500 text-white p-4 rounded">
-                Tailwind is working!
-            </div>
-
-
-
-        </section>
+                    </Button>
+                </Flex>
+            </Flex>
+        </Box>
     );
 }
