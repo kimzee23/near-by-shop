@@ -1,48 +1,77 @@
+import {
+    Box,
+    Heading,
+    Text,
+    Avatar,
+    HStack,
+    VStack,
+    SimpleGrid,
+    Container,
+} from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 
 const testimonials = [
     {
-        name: "Sarah Johnson",
+        name: "John Doe",
+        avatar: "https://i.pravatar.cc/150?img=3",
+        review: "Amazing products and super fast delivery. Highly recommend!",
         rating: 5,
-        feedback: "This website is amazing! Everything fits perfectly and delivery was fast.",
     },
     {
-        name: "Michael Chen",
+        name: "Jane Smith",
+        avatar: "https://i.pravatar.cc/150?img=5",
+        review: "Stylish and affordable. I love shopping here!",
         rating: 4,
-        feedback: "Great variety and good customer service. I’ll definitely come back!",
     },
     {
-        name: "Lola Adewale",
+        name: "Michael Ray",
+        avatar: "https://i.pravatar.cc/150?img=7",
+        review: "Great customer support and top-notch quality items.",
         rating: 5,
-        feedback: "Affordable and stylish. My favorite online store now!",
     },
 ];
 
 export default function TestimonialSection() {
     return (
-        <section className="bg-gray-50 py-12 px-4">
-            <div className="max-w-6xl mx-auto text-center">
-                <h2 className="text-3xl font-bold mb-10 text-gray-900">
-                    Our Happy Customers
-                </h2>
+        <Box py={12} bg="gray.50">
+            <Container maxW="7xl">
+                <Heading as="h2" size="lg" mb={8} textAlign="center">
+                    What Our Customers Are Saying
+                </Heading>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {testimonials.map((review, index) => (
-                        <div
+                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+                    {testimonials.map((t, index) => (
+                        <Box
                             key={index}
-                            className="bg-white p-6 rounded-xl shadow hover:shadow-md transition-all"
+                            bg="white"
+                            p={6}
+                            borderRadius="lg"
+                            boxShadow="md"
+                            display="flex"
+                            flexDirection="column"
+                            alignItems="center"
+                            textAlign="center"
                         >
-                            <div className="flex justify-center mb-4 text-yellow-500">
+                            <Avatar name={t.name} src={t.avatar} size="xl" mb={4} />
+                            <Text fontSize="md" mb={3}>
+                                “{t.review}”
+                            </Text>
+                            <HStack spacing={1} mb={2}>
                                 {Array.from({ length: 5 }).map((_, i) => (
-                                    <FaStar key={i} className={i < review.rating ? "" : "text-gray-300"} />
+                                    <FaStar
+                                        key={i}
+                                        color={i < t.rating ? "#ECC94B" : "#E2E8F0"} // Gold or Gray
+                                        size={16}
+                                    />
                                 ))}
-                            </div>
-                            <p className="text-gray-700 italic mb-4">“{review.feedback}”</p>
-                            <p className="text-sm font-semibold text-gray-900">{review.name}</p>
-                        </div>
+                            </HStack>
+                            <Text fontWeight="bold" fontSize="sm" mt={2}>
+                                {t.name}
+                            </Text>
+                        </Box>
                     ))}
-                </div>
-            </div>
-        </section>
+                </SimpleGrid>
+            </Container>
+        </Box>
     );
 }

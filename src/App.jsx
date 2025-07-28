@@ -1,5 +1,6 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -13,17 +14,27 @@ function App() {
     return (
         <BrowserRouter>
             <Box minH="100vh" display="flex" flexDirection="column">
+                {/* Header */}
                 <Navbar />
-                <Box as="main" flex="1">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/cart" element={<Cart />} />
-                        <Route path="/product/:id" element={<ProductDetail />} />
-                        <Route path="/checkout" element={<Checkout />} />
-                    </Routes>
-                    <TestimonialSection />
-                    <NewsletterSection />
+
+                {/* Main Content */}
+                <Box as="main" flex="1" py={6}>
+                    {/* Wrap all main content in a container for proper alignment */}
+                    <Container maxW="7xl">
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/cart" element={<Cart />} />
+                            <Route path="/product/:id" element={<ProductDetail />} />
+                            <Route path="/checkout" element={<Checkout />} />
+                        </Routes>
+
+                        {/* These components will appear on all pages */}
+                        <TestimonialSection />
+                        <NewsletterSection />
+                    </Container>
                 </Box>
+
+                {/* Footer */}
                 <Footer />
             </Box>
         </BrowserRouter>

@@ -1,3 +1,4 @@
+import { Box, Image, Text, Button, Flex, HStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
@@ -10,36 +11,76 @@ export default function ProductCard({ product }) {
     const oldPrice = (price / (1 - discountPercentage / 100)).toFixed(2);
 
     return (
-        <div className="border rounded-xl p-4 shadow-sm hover:shadow-md transition bg-white">
+        <Box
+            border="1px"
+            borderColor="gray.200"
+            borderRadius="xl"
+            p={4}
+            bg="white"
+            shadow="sm"
+            _hover={{ shadow: "md" }}
+            display="flex"
+            flexDirection="column"
+        >
             <Link to={`/product/${id}`}>
-                <img
+                <Image
                     src={thumbnail}
                     alt={title}
-                    className="w-full h-60 object-cover rounded-lg mb-4"
+                    borderRadius="lg"
+                    objectFit="cover"
+                    w="100%"
+                    h="240px"
+                    mb={3}
                 />
-                <h3 className="text-base md:text-lg font-medium line-clamp-1 text-gray-900">{title}</h3>
+                <Text fontSize="lg" fontWeight="semibold" isTruncated mb={2}>
+                    {title}
+                </Text>
             </Link>
-            <div className="flex items-center gap-1 text-yellow-500 text-xs mt-1">
+
+            {/* ⭐ Horizontal Star Rating */}
+            <HStack spacing={1} mb={2}>
                 {Array.from({ length: 5 }).map((_, i) => (
-                    <FaStar key={i} className={i < Math.round(rating) ? "text-yellow-500" : "text-gray-300"} />
+                    <FaStar
+                        key={i}
+                        color={i < Math.round(rating) ? "#ECC94B" : "#E2E8F0"} // gold or gray
+                        size={14}
+                    />
                 ))}
-                <span className="text-gray-500 ml-1">{rating}</span>
-            </div>
-            <div className="mt-2 text-gray-800 font-medium flex items-center gap-2">
-                <span className="text-base font-semibold">${price}</span>
+                <Text fontSize="xs" color="gray.500" ml={1}>
+                    {rating}
+                </Text>
+            </HStack>
+
+            {/* 💰 Price Section */}
+            <Flex align="center" gap={2} mb={4}>
+                <Text fontWeight="bold" fontSize="md">
+                    ${price}
+                </Text>
                 {discountPercentage > 0 && (
                     <>
-                        <span className="line-through text-gray-400 text-sm">${oldPrice}</span>
-                        <span className="text-red-500 text-sm">-{Math.round(discountPercentage)}%</span>
+                        <Text
+                            fontSize="sm"
+                            color="gray.500"
+                            textDecoration="line-through"
+                        >
+                            ${oldPrice}
+                        </Text>
+                        <Text fontSize="sm" color="red.500">
+                            -{Math.round(discountPercentage)}%
+                        </Text>
                     </>
                 )}
-            </div>
-            <button
+            </Flex>
+
+            {/* 🛒 Add to Cart Button */}
+            <Button
                 onClick={() => dispatch(addToCart(product))}
-                className="mt-3 w-full bg-black hover:bg-gray-800 text-white py-2 rounded-xl text-sm font-medium"
+                colorScheme="blackAlpha"
+                borderRadius="full"
+                mt="auto"
             >
                 Add to Cart
-            </button>
-        </div>
+            </Button>
+        </Box>
     );
 }

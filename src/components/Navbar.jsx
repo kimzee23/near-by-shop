@@ -50,8 +50,8 @@ export default function Navbar() {
             </Flex>
 
             {/* Navbar */}
-            <Box borderBottom="1px" borderColor="gray.200" bg="white" px={4} py={3}>
-                <Flex maxW="7xl" mx="auto" align="center" gap={6}>
+            <Box w="full" borderBottom="1px" borderColor="gray.200" bg="white" px={4} py={3}>
+            <Flex maxW="7xl" mx="auto" align="center" gap={6}>
                     {/* Logo */}
                     <Text fontSize="2xl" fontWeight="bold" color="gray.800">
                         <Link to="/">SHOP.CO</Link>
