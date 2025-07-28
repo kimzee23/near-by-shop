@@ -1,101 +1,57 @@
-import {
-    Box,
-    Flex,
-    Grid,
-    GridItem,
-    Text,
-    VStack,
-    HStack,
-    Link as ChakraLink,
-    Divider,
-    useBreakpointValue,
-} from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Box, Container, Grid,  GridItem,Text, VStack, Link, HStack } from '@chakra-ui/react';
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <Box bg="black" color="white" px={{ base: 4, md: 10 }} py={12}>
-            <Grid
-                maxW="6xl"
-                mx="auto"
-                templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(5, 1fr)' }}
-                gap={8}
-            >
-                <GridItem colSpan={{ base: 2, md: 2 }}>
-                    <Text fontSize="2xl" fontWeight="bold" mb={4}>
-                        SHOP.CO
-                    </Text>
-                    <Text color="gray.400" fontSize="sm" mb={6}>
-                        Find clothes that match your style. Unbeatable quality.
-                    </Text>
-                    <HStack spacing={4}>
-                        <ChakraLink href="#" isExternal>
-                            <FaFacebookF />
-                        </ChakraLink>
-                        <ChakraLink href="#" isExternal>
-                            <FaInstagram />
-                        </ChakraLink>
-                        <ChakraLink href="#" isExternal>
-                            <FaTwitter />
-                        </ChakraLink>
-                    </HStack>
-                </GridItem>
+        <Box bg="black" color="white" py={12}>
+            <Container maxW="7xl">
+                <Grid templateColumns={{ base: '1fr', md: 'repeat(5, 1fr)' }} gap={8}>
+                    <GridItem colSpan={{ base: 1, md: 2 }}>
+                        <Text fontSize="2xl" fontWeight="bold" mb={4}>SHOP.CO</Text>
+                        <Text color="gray.400" fontSize="sm" mb={6}>
+                            Find clothes that match your style. Unbeatable quality.
+                        </Text>
+                        <HStack spacing={4}>
+                            <Link href="#"><FaFacebookF /></Link>
+                            <Link href="#"><FaInstagram /></Link>
+                            <Link href="#"><FaTwitter /></Link>
+                        </HStack>
+                    </GridItem>
 
-                {/* Links Section */}
-                <VStack align="start" spacing={2}>
-                    <Text fontWeight="semibold" mb={2}>
-                        Company
-                    </Text>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        About
-                    </ChakraLink>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Careers
-                    </ChakraLink>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Press
-                    </ChakraLink>
-                </VStack>
+                    <VStack align="start" spacing={2}>
+                        <Text fontWeight="semibold">Company</Text>
+                        <Link href="/">About</Link>
+                        <Link href="/">Careers</Link>
+                        <Link href="/">Press</Link>
+                    </VStack>
+                    <VStack align="start" spacing={2}>
+                        <Text fontWeight="semibold">Support</Text>
+                        <Link href="/">Contact Us</Link>
+                        <Link href="/">Help Center</Link>
+                        <Link href="/">Returns</Link>
+                    </VStack>
+                    <VStack align="start" spacing={2}>
+                        <Text fontWeight="semibold">Resources</Text>
+                        <Link href="/">Blog</Link>
+                        <Link href="/">Developers</Link>
+                        <Link href="/">Support Docs</Link>
+                    </VStack>
+                </Grid>
 
-                <VStack align="start" spacing={2}>
-                    <Text fontWeight="semibold" mb={2}>
-                        Support
-                    </Text>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Contact Us
-                    </ChakraLink>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Help Center
-                    </ChakraLink>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Returns
-                    </ChakraLink>
-                </VStack>
-
-                <VStack align="start" spacing={2}>
-                    <Text fontWeight="semibold" mb={2}>
-                        Resources
-                    </Text>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Blog
-                    </ChakraLink>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Developers
-                    </ChakraLink>
-                    <ChakraLink as={Link} to="/" color="gray.400" fontSize="sm">
-                        Support Docs
-                    </ChakraLink>
-                </VStack>
-            </Grid>
-
-            <Divider borderColor="gray.700" my={12} />
-
-            <Text fontSize="sm" color="gray.500" textAlign="center">
-                © {year} SHOP.CO. All Rights Reserved.
-            </Text>
+                <Text
+                    mt={10}
+                    pt={6}
+                    borderTop="1px solid"
+                    borderColor="gray.700"
+                    textAlign="center"
+                    color="gray.500"
+                    fontSize="sm"
+                >
+                    © {year} SHOP.CO. All Rights Reserved.
+                </Text>
+            </Container>
         </Box>
     );
 }
