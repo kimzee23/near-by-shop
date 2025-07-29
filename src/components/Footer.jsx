@@ -1,16 +1,41 @@
-import { Box, Container, Grid,  GridItem,Text, VStack, Link, HStack } from '@chakra-ui/react';
+import {
+    Box,
+    Container,
+    Grid,
+    GridItem,
+    Text,
+    VStack,
+    Link,
+    HStack,
+    Image,
+    Flex,
+} from '@chakra-ui/react';
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
+
+import visa from '../assets/payments/visa.png';
+import mastercard from '../assets/payments/mastercard.png';
+import paypal from '../assets/payments/paypal.png';
 
 export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <Box bg="black" color="white" py={12}>
+        <Box
+            bg="#F0F0F0"
+            color="black"
+            pt={40} // Add top padding to make space for the floating newsletter
+            pb={8}
+            position="relative"
+        >
             <Container maxW="7xl">
+                {/* Top Grid Section */}
                 <Grid templateColumns={{ base: '1fr', md: 'repeat(5, 1fr)' }} gap={8}>
+                    {/* Left Branding */}
                     <GridItem colSpan={{ base: 1, md: 2 }}>
-                        <Text fontSize="2xl" fontWeight="bold" mb={4}>SHOP.CO</Text>
-                        <Text color="gray.400" fontSize="sm" mb={6}>
+                        <Text fontSize="2xl" fontWeight="bold" mb={4}>
+                            NearbyShop.CO
+                        </Text>
+                        <Text color="gray.500" fontSize="sm" mb={6}>
                             Find clothes that match your style. Unbeatable quality.
                         </Text>
                         <HStack spacing={4}>
@@ -40,17 +65,27 @@ export default function Footer() {
                     </VStack>
                 </Grid>
 
-                <Text
+                {/* Bottom Bar */}
+                <Flex
                     mt={10}
                     pt={6}
                     borderTop="1px solid"
-                    borderColor="gray.700"
-                    textAlign="center"
-                    color="gray.500"
-                    fontSize="sm"
+                    borderColor="gray.300"
+                    justify="space-between"
+                    align="center"
+                    direction={{ base: 'column', md: 'row' }}
+                    gap={4}
                 >
-                    © {year} SHOP.CO. All Rights Reserved.
-                </Text>
+                    <Text color="gray.600" fontSize="sm" textAlign={{ base: 'center', md: 'left' }}>
+                        © {year} NearBy.CO. All Rights Reserved.
+                    </Text>
+
+                    <HStack spacing={4}>
+                        <Image src={visa} alt="Visa" h="24px" />
+                        <Image src={mastercard} alt="Mastercard" h="24px" />
+                        <Image src={paypal} alt="PayPal" h="24px" />
+                    </HStack>
+                </Flex>
             </Container>
         </Box>
     );

@@ -1,29 +1,74 @@
+import {
+    Box,
+    Button,
+    Container,
+    Divider,
+    Flex,
+    Heading,
+    Icon,
+    Stack,
+    Text,
+    VStack,
+} from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
+import { SiVisa, SiMastercard, SiPaypal } from 'react-icons/si';
+import { useNavigate } from 'react-router-dom';
 
 export default function Checkout() {
     const cart = useSelector((state) => state.cart);
     const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const navigate = useNavigate();
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            <h1 className="text-3xl font-bold mb-6">Checkout</h1>
+        <Container maxW="4xl" py={10}>
+            <Heading fontSize="3xl" mb={6}>
+                Checkout
+            </Heading>
 
-            <div className="bg-white p-6 shadow rounded-lg">
-                <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-                {cart.map(item => (
-                    <div key={item.id} className="flex justify-between py-2 border-b last:border-b-0">
-                        <span>{item.title} x {item.quantity}</span>
-                        <span>${(item.price * item.quantity).toFixed(2)}</span>
-                    </div>
-                ))}
-                <div className="flex justify-between font-bold mt-4">
-                    <span>Total:</span>
-                    <span>${subtotal.toFixed(2)}</span>
-                </div>
-                <button className="mt-6 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800">
+            <Box bg="white" p={6} rounded="md" shadow="md">
+                <Heading size="md" mb={4}>
+                    Order Summary
+                </Heading>
+
+                <VStack spacing={3} align="stretch">
+                    {cart.map((item) => (
+                        <Flex
+                            key={item.id}
+                            justify="space-between"
+                            borderBottom="1px solid"
+                            borderColor="gray.200"
+                            py={2}
+                        >
+                            <Text>{item.title} × {item.quantity}</Text>
+                            <Text>${(item.price * item.quantity).toFixed(2)}</Text>
+                        </Flex>
+                    ))}
+                </VStack>
+
+                <Divider my={4} />
+
+                <Flex justify="space-between" fontWeight="bold" fontSize="lg">
+                    <Text>Total:</Text>
+                    <Text>${subtotal.toFixed(2)}</Text>
+                </Flex>
+
+               
+                <Flex gap={6} mt={6} justify="center" color="gray.600" fontSize="3xl">
+                    <Icon as={SiVisa} />
+                    <Icon as={SiMastercard} />
+                    <Icon as={SiPaypal} />
+                </Flex>
+
+                <Button
+                    mt={6}
+                    w="full"
+                    colorScheme="blackAlpha"
+                    size="lg"
+                    onClick={() => navigate('/payment')}
+                >
                     Place Order
-                </button>
-            </div>
-        </div>
+                </Button>
+            </Box>
+        </Container>
     );
 }

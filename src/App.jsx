@@ -9,6 +9,7 @@ import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import NewsletterSection from './components/NewsletterSection';
 import TestimonialSection from './components/TestimonialSection';
+import PaymentPage from "./pages/Payment.jsx";
 
 function App() {
     return (
@@ -17,24 +18,19 @@ function App() {
                 {/* Header */}
                 <Navbar />
 
-                {/* Main Content */}
                 <Box as="main" flex="1" py={6}>
-                    {/* Wrap all main content in a container for proper alignment */}
                     <Container maxW="7xl">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/product/:id" element={<ProductDetail />} />
                             <Route path="/checkout" element={<Checkout />} />
+                            <Route path="/payment" element={<PaymentPage />} />
                         </Routes>
-
-                        {/* These components will appear on all pages */}
                         <TestimonialSection />
-                        <NewsletterSection />
                     </Container>
                 </Box>
-
-                {/* Footer */}
+                <NewsletterSection />
                 <Footer />
             </Box>
         </BrowserRouter>
