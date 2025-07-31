@@ -72,7 +72,7 @@ export default function ProductCard({ product }) {
                 )}
             </Flex>
 
-            {/* 🛒 Add to Cart Button */}
+            {/* 🛒 Add to CartThings Button */}
             <Button
                 onClick={() => dispatch(addToCart(product))}
                 colorScheme="blackAlpha"

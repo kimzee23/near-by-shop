@@ -5,7 +5,7 @@ import {
     decreaseQty,
 } from '../features/cart/cartSlice';
 
-export default function Cart() {
+export default function CartThings() {
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
 
