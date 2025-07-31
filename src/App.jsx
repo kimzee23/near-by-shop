@@ -6,10 +6,10 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Cart from './pages/cart';
 import ProductDetail from './pages/ProductDetail';
-import Checkout from './pages/Checkout';
+import Checkout from './pages/checkout';
 import NewsletterSection from './components/NewsletterSection';
 import TestimonialSection from './components/TestimonialSection';
-import PaymentPage from "./pages/Payment.jsx";
+import PaymentPage from "./pages/payment.jsx";
 
 function App() {
     return (
