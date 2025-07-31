@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Cart from './pages/Cart';
+import Cart from './pages/cart';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import NewsletterSection from './components/NewsletterSection';
