@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../features/cart/cartSlice';
 import HeroSection from '../components/HeroSection';
 import BrandSlider from '../components/BrandSlider';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/productCard';
 import { useState, useEffect } from 'react';
 
 export default function Home() {
